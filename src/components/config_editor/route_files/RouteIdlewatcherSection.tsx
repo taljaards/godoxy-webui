@@ -5,6 +5,7 @@ import { StoreFormSelectField } from '@/components/store/Select'
 import { FieldGroup } from '@/components/ui/field'
 import type { Routes } from '@/types/godoxy'
 import { STOP_METHODS, STOP_SIGNALS } from '@/types/godoxy/providers/idlewatcher'
+import { IdlewatcherNotifications } from '../IdlewatcherNotifications'
 import { commaSeparatedToArray } from './utils'
 
 type RouteIdlewatcherSectionProps = {
@@ -68,6 +69,7 @@ export function RouteIdlewatcherSection({ form }: RouteIdlewatcherSectionProps) 
         placeholder="route1,route2"
         description="Routes to wait for before starting (comma separated)"
       />
+      <IdlewatcherNotifications state={form.idlewatcher} inherit />
     </FieldGroup>
   )
 }

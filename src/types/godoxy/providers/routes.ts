@@ -5,6 +5,7 @@ import type { MiddlewaresMap } from '../middlewares/middlewares'
 import type { Duration, FileServerBindPort, Hostname, IPv4, IPv6, Port, StreamPort } from '../types'
 import type { HealthcheckConfig } from './healthcheck'
 import type { HomepageConfig } from './homepage'
+import type { IdleWatcherNotifyConfig } from './idlewatcher'
 import type { LoadBalanceConfig } from './loadbalance'
 import type { ProxmoxRouteConfig } from './proxmox'
 export const PROXY_SCHEMES = ['http', 'https', 'h2c'] as const
@@ -12,6 +13,10 @@ export const STREAM_SCHEMES = ['tcp', 'udp'] as const
 
 export type ProxyScheme = (typeof PROXY_SCHEMES)[number]
 export type StreamScheme = (typeof STREAM_SCHEMES)[number]
+
+type RouteIdlewatcherConfig = Partial<Omit<IdlewatcherConfig, 'docker' | 'proxmox'>> & {
+  notify?: IdleWatcherNotifyConfig
+}
 
 export type RouteRule =
   | {
@@ -89,7 +94,7 @@ export type ReverseProxyRoute = {
   /** Proxmox config */
   proxmox?: ProxmoxRouteConfig
   /** Idlewatcher config */
-  idlewatcher?: Omit<IdlewatcherConfig, 'docker' | 'proxmox'>
+  idlewatcher?: RouteIdlewatcherConfig
 } & HTTPConfig
 
 export type HTTPConfig = {
@@ -196,5 +201,5 @@ export type StreamRoute = {
   /** Proxmox config */
   proxmox?: ProxmoxRouteConfig
   /** Idlewatcher config */
-  idlewatcher?: Omit<IdlewatcherConfig, 'docker' | 'proxmox'>
+  idlewatcher?: RouteIdlewatcherConfig
 }
