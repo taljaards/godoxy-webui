@@ -1,4 +1,5 @@
 import type { HealthcheckConfig } from '../providers/healthcheck'
+import type { IdleWatcherNotifyConfig } from '../providers/idlewatcher'
 import type { DomainName } from '../types'
 import type { ACLConfig } from './acl'
 import type { AutocertConfig } from './autocert'
@@ -37,6 +38,10 @@ export type Config = {
    */
   defaults?: {
     healthcheck?: HealthcheckConfig
+    idlewatcher?: {
+      /** Sleep and wake notification defaults for routes with an idle timeout */
+      notify?: IdleWatcherNotifyConfig
+    }
   }
   /**
    * Optional timeout before shutdown

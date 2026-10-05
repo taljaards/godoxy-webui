@@ -1,5 +1,10 @@
 import type { Duration, URI } from '../types'
 
+export type IdleWatcherNotifyConfig = {
+  /** Notification provider names. Omit to use defaults/all providers; [] disables notifications. */
+  to?: string[]
+}
+
 export const STOP_METHODS = ['pause', 'stop', 'kill'] as const
 export type StopMethod = (typeof STOP_METHODS)[number]
 
@@ -43,4 +48,6 @@ export type IdleWatcherConfig = {
    * @title Start Endpoint
    */
   start_endpoint?: URI
+  /** Sleep and wake notification targets */
+  notify?: IdleWatcherNotifyConfig
 }
